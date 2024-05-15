@@ -1,5 +1,4 @@
-// import React from 'react'
-
+'use client'
 import { Image, PencilRuler, Shield } from "lucide-react";
 import { useState } from "react";
 
