@@ -3,7 +3,15 @@ import BackgroundController from "@/components/BackgroundController";
 import Header from "@/components/Header";
 import IconController from "@/components/IconController";
 import SideNav from "@/components/SideNav";
+import Script from "next/script";
 import { useState } from "react";
+
+<Script
+  id="adsbygoogle-init"
+  strategy="afterInteractive"
+  crossOrigin="anonymous"
+  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4025138726624396"
+/>
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
