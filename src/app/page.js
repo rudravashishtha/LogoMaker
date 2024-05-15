@@ -1,8 +1,9 @@
+"use client"
 import BackgroundController from "@/components/BackgroundController";
 import Header from "@/components/Header";
 import IconController from "@/components/IconController";
 import SideNav from "@/components/SideNav";
-import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);

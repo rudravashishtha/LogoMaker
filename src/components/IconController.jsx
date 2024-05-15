@@ -1,3 +1,4 @@
+"use client"
 import { Smile } from "lucide-react";
 import { Slider } from "./ui/slider";
 import { useState } from "react";
