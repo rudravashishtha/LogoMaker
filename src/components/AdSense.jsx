@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-const Adsense = () => {
+const AdSense = () => {
   return (
     <Script
       async
@@ -12,4 +12,4 @@ const Adsense = () => {
   );
 };
 
-export default Adsense;
+export default AdSense;

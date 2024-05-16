@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Adsense from "@/components/Adsense";
+import AdSense from "@/components/AdSense";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Adsense />
+        <AdSense />
       </head>
       <body className={inter.className}>{children}</body>
     </html>
