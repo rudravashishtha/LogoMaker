@@ -13,7 +13,7 @@
     }
     const [size, setSize] = useState(storageValue?.iconSize || 280);
     const [rotate, setRotate] = useState(storageValue?.iconRotate || 0);
-    const [color, setColor] = useState(storageValue?.iconColor || "#000");
+    const [color, setColor] = useState(storageValue?.iconColor || "#fff");
     const [strokeWidth, setStrokeWidth] = useState(storageValue?.iconStrokeWidth || 1);
     const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext);
 
