@@ -1,45 +1,43 @@
-  "use client";
-  import { Smile } from "lucide-react";
-  import { Slider } from "./ui/slider";
-  import { useContext, useEffect, useState } from "react";
-  import ColorPickerController from "./ColorPickerController";
-  import { UpdateStorageContext } from "@/context/UpdateStorageContext";
+"use client";
+import { Slider } from "./ui/slider";
+import { useContext, useEffect, useState } from "react";
+import ColorPickerController from "./ColorPickerController";
+import { UpdateStorageContext } from "@/context/UpdateStorageContext";
+import IconList from "./IconList";
 
-  function IconController() {
-    let storageValue = {};
-    const ISSERVER = typeof window === "undefined";
-    if(!ISSERVER) {
-      storageValue = JSON.parse(localStorage.getItem("value"));
-    }
-    const [size, setSize] = useState(storageValue?.iconSize || 280);
-    const [rotate, setRotate] = useState(storageValue?.iconRotate || 0);
-    const [color, setColor] = useState(storageValue?.iconColor || "#fff");
-    const [strokeWidth, setStrokeWidth] = useState(storageValue?.iconStrokeWidth || 1);
-    const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext);
+function IconController() {
+  let storageValue = {};
+  const ISSERVER = typeof window === "undefined";
+  if (!ISSERVER) {
+    storageValue = JSON.parse(localStorage.getItem("value"));
+  }
+  const [size, setSize] = useState(storageValue?.iconSize || 280);
+  const [rotate, setRotate] = useState(storageValue?.iconRotate || 0);
+  const [color, setColor] = useState(storageValue?.iconColor || "#fff");
+  const [strokeWidth, setStrokeWidth] = useState(
+    storageValue?.iconStrokeWidth || 1
+  );
+  const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext);
+  const [icon, setIcon] = useState(storageValue?.icon || "Smile");
 
-    useEffect(() => {
-
-      const updatedValue = {
-        ...storageValue,
-        iconSize: size,
-        iconRotate: rotate,
-        iconColor: color,
-        iconStrokeWidth: strokeWidth,
-        icon: "Smile",
-      };
-      setUpdateStorage(updatedValue);
-      localStorage.setItem("value", JSON.stringify(updatedValue));
+  useEffect(() => {
+    const updatedValue = {
+      ...storageValue,
+      iconSize: size,
+      iconRotate: rotate,
+      iconColor: color,
+      iconStrokeWidth: strokeWidth,
+      icon: icon,
+    };
+    setUpdateStorage(updatedValue);
+    localStorage.setItem("value", JSON.stringify(updatedValue));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [size, rotate, color, strokeWidth]);
+  }, [size, rotate, color, strokeWidth, icon]);
 
-    return (
+  return (
+    <div>
       <div className="pb-32">
-        <div>
-          <label>Icon</label>
-          <div className="p-3 cursor-pointer bg-gray-200 rounded-md w-[50px] h-[50px] my-2 flex items-center justify-center">
-            <Smile />
-          </div>
-        </div>
+        <IconList selectedIcon={(icon) => setIcon(icon)} />
         <div className="py-2">
           <label className="p-2 flex justify-between">
             Size<span>{size}px</span>
@@ -85,7 +83,8 @@
           />
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  export default IconController;
+export default IconController;

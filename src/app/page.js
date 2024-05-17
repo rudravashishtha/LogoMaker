@@ -18,10 +18,11 @@ import { useState } from "react";
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [updateStorage, setUpdateStorage] = useState({});
+  const [downloadLogo, setDownloadLogo] = useState();
   return (
     <UpdateStorageContext.Provider value={{updateStorage, setUpdateStorage}}>
       <div>
-        <Header />
+        <Header DownloadLogo={setDownloadLogo} />
         <div className="w-64 fixed">
           <SideNav selectedIndex={(value) => setSelectedIndex(value)} />
         </div>
@@ -34,9 +35,8 @@ export default function Home() {
             )}
           </div>
           <div className="md:col-span-4">
-            <LogoPreview />
+            <LogoPreview downloadLogo={downloadLogo} />
           </div>
-          {/* <div className="bg-blue-100 md:col-span-1">Ads Banner</div> */}
         </div>
       </div>
     </UpdateStorageContext.Provider>
