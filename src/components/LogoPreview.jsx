@@ -1,8 +1,10 @@
 import { UpdateStorageContext } from "@/context/UpdateStorageContext";
 import html2canvas from "html2canvas";
 import { icons } from "lucide-react";
+import Image from "next/image";
 import React, { useContext, useEffect, useState } from "react";
 
+const BASE_URL = "https://logoexpress.tubeguruji.com";
 function LogoPreview({ downloadLogo }) {
   const [storageValue, setStorageValue] = useState();
   const { updateStorage, setUpdateStorage } = useContext(UpdateStorageContext);
@@ -24,8 +26,9 @@ function LogoPreview({ downloadLogo }) {
     }).then((canvas) => {
       const pngImage = canvas.toDataURL("image/png");
       const downloadLink = document.createElement("a");
+      var d = new Date(); // for now
       downloadLink.href = pngImage;
-      downloadLink.download = "Cologo.png";
+      downloadLink.download = `Cologo-${d.getHours()}_${d.getMinutes()}_${d.getSeconds()}.png`;
       downloadLink.click();
     });
   };
@@ -57,13 +60,25 @@ function LogoPreview({ downloadLogo }) {
             background: storageValue?.backgroundColor,
           }}
         >
-          <Icon
-            name={storageValue?.icon}
-            color={storageValue?.iconColor}
-            size={storageValue?.iconSize}
-            strokeWidth={storageValue?.iconStrokeWidth}
-            rotate={storageValue?.iconRotate}
-          />
+          {storageValue?.icon?.includes(".png") ? (
+            <Image
+              src={BASE_URL + "/png/" + storageValue?.icon}
+              alt="icon"
+              width={storageValue?.iconSize}
+              height={storageValue?.iconSize}
+              style={{
+                transform: `rotate(${storageValue?.iconRotate}deg)`,
+              }}
+            />
+          ) : (
+            <Icon
+              name={storageValue?.icon}
+              color={storageValue?.iconColor}
+              size={storageValue?.iconSize}
+              strokeWidth={storageValue?.iconStrokeWidth}
+              rotate={storageValue?.iconRotate}
+            />
+          )}
         </div>
       </div>
     </div>

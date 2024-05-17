@@ -44,7 +44,8 @@ function IconController() {
           </label>
           <Slider
             defaultValue={[size]}
-            max={512}
+            max={300}
+            min={20}
             step={1}
             onValueChange={(event) => setSize(event[0])}
             className="cursor-pointer"
@@ -62,26 +63,30 @@ function IconController() {
             className="cursor-pointer"
           />
         </div>
-        <div className="py-2">
-          <label className="p-2 flex justify-between">
-            Stroke<span>{strokeWidth}px</span>
-          </label>
-          <Slider
-            defaultValue={[strokeWidth]}
-            max={4}
-            min={1}
-            step={0.2}
-            onValueChange={(event) => setStrokeWidth(event[0])}
-            className="cursor-pointer"
-          />
-        </div>
-        <div className="py-2">
-          <label className="p-2 flex justify-between">Icon Color</label>
-          <ColorPickerController
-            hideController={true}
-            selectedColor={(color) => setColor(color)}
-          />
-        </div>
+        {storageValue?.icon?.includes(".png") ? null : (
+          <>
+            <div className="py-2">
+              <label className="p-2 flex justify-between">
+                Stroke<span>{strokeWidth}px</span>
+              </label>
+              <Slider
+                defaultValue={[strokeWidth]}
+                max={4}
+                min={1}
+                step={0.2}
+                onValueChange={(event) => setStrokeWidth(event[0])}
+                className="cursor-pointer"
+              />
+            </div>
+            <div className="py-2">
+              <label className="p-2 flex justify-between">Icon Color</label>
+              <ColorPickerController
+                hideController={true}
+                selectedColor={(color) => setColor(color)}
+              />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
